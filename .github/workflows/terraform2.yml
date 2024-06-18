@@ -7,9 +7,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    name: "Terraform reources deployment"
+    environment: production
+
+    # Use bash shell regardless whether githiub actions runner is ubuntu, windows or mac os
+    defaults:
+      run:
+        shell: bash
+
+
     steps:
+    #checkout the repository to Github Actions runner
+    - name: Checkout
     - uses: actions/checkout@v3
 
+    #Install the latest version of terraform CLI & configure the terraform CLI Configiration file with a Terraform Cloud user API Token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
